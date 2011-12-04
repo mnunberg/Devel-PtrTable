@@ -63,6 +63,26 @@ Internally, perl maintains a C<struct ptr_tbl> during cloning, which allows the
 interpreter to properly copy objects, as well as keep track of which objects were
 copied.
 
+=head2 SYNOPSIS
+
+    use threads;
+    use Devel::PtrTable;
+    
+    my $someref = \"somestring";
+    my $refhash = {
+        $someref + 0 => $someref
+    };
+    
+    my $thr = $thr->create(
+        sub {
+            while (my ($addr,$v) = each %$refhash) {
+                my $newval = PtrTable_get($addr);
+                die("oops!") unless $newval == $addr;
+            }
+        }
+    );
+
+
 =head2 FUNCTIONS
 
 =head3 PtrTable_get($memaddr)
