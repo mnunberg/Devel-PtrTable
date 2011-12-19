@@ -1,11 +1,10 @@
 package Devel::PtrTable;
 use strict;
 use warnings;
-use threads;
 use Task::Weaken;
 use base qw(Exporter);
 
-our $VERSION = 0.01;
+our $VERSION = 0.03;
 require XSLoader;
 XSLoader::load(__PACKAGE__, $VERSION);
 

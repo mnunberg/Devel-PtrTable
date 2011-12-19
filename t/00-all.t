@@ -1,6 +1,15 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+
+BEGIN {
+    use Config;
+    if(! $Config{'useithreads'}) {
+        print("1..0 # Skip: Perl not compiled with 'useithreads'\n");
+        exit(0);
+    }
+}
+
 use threads;
 use Devel::PtrTable;
 use Test::More;
